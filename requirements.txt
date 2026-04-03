@@ -1,0 +1,10 @@
+trimesh
+networkx
+robust-laplacian
+potpourri3d
+open3d
+h5py
+tensorboard
+
+# sudo apt-get install libx11-6
+# sudo apt-get install libgl1

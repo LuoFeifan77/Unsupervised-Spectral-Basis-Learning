@@ -1,0 +1,113 @@
+# general setting
+name: smal_F
+backend: dp # DataParallel
+type: new_MSFOPModel
+num_gpu: 6
+manual_seed: 1234
+refine: 0 #10
+non-isometric: true
+partial: false
+visualize: true
+
+# path
+path:
+  resume_state: experiments/smal_F/models/2000.pth
+  resume: false
+
+# datasets
+datasets:
+  test_dataset:
+    name: Val
+    type: PairSmalDataset
+    phase: test
+    data_root: ../data/SMAL_r/
+    category: false
+    return_evecs: true
+    return_faces: true
+    num_evecs: 200
+    return_corr: true
+    return_dist: true
+
+# network setting
+networks:
+  #1
+  feature_extractor:
+    type: DiffusionNet
+    in_channels: 3
+    out_channels: 256
+    cache_dir: ../data/SMAL_r/diffusion
+    input_type: xyz
+  fmap_net:
+    type: RegularizedFMNet
+    bidirectional: false
+  permutation:
+    type: Similarity
+    tau: 0.07
+    hard: true
+
+  #2 learnable filter
+  # conv:
+  #   type: Learned_Fliters
+  #   Poly_Type: JacobiConv
+  #   orders: 32 
+  #   alpha: 1.0 
+  #   learnable_bases: True #True 
+  #   learnable_alphas: True
+  #   normalized_bases: True
+  #   a: 1.0
+  #   b: 1.0
+  
+  # #3 combination
+  # comb:
+  #   type: Combination
+  #   orders_basis: 32 
+  #   output_channels: 16
+
+  conv:
+    type: Heat_Kernel_Fliters
+    C_inout: 256   # number of filters
+
+# training setting
+# train:
+#   total_epochs: 5 # 15
+#   optims: 
+#     feature_extractor:
+#       type: Adam
+#       lr: 1.0e-3
+#     conv:
+#       type: Adam
+#       lr: 1.0e-3
+#     comb:
+#       type: Adam
+#       lr: 1.0e-3
+
+  # schedulers:  # 
+  #   feature_extractor:
+  #     type: CosineAnnealingLR  # 这个非常重要
+  #     eta_min: 1.0e-4
+  #     T_max: 5 #15
+  #   conv:
+  #     type: CosineAnnealingLR
+  #     eta_min: 1.0e-4
+  #     T_max: 5 #15
+  #   comb:
+  #     type: CosineAnnealingLR
+  #     eta_min: 1.0e-4
+  #     T_max: 5 #15
+
+  # losses:
+  #   msfop_loss:
+  #     type: DeepMSFOPLoss
+  #     w_bij: 1.0
+  #     w_co_orth: 0.0
+  #     w_co: 0.1
+  #     w_sm: 1.0
+  #     iso_matching: False
+
+# validation setting
+val:
+  metrics:
+    geo_error:
+      type: calculate_geodesic_error
+    plot_pck:
+      type: plot_pck

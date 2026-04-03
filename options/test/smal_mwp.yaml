@@ -1,0 +1,46 @@
+# general setting
+name: smal_mwp
+backend: dp # DataParallel
+type: MWPModel
+num_gpu: 1 # 这里设置1, 表示只在单卡上运行， 不要改动
+gpu_idx: 6 # 指定运行下标
+train_desc_path : ../data/SMAL_r/SHOT_V7 # descriptor path
+test_desc_path : ../data/SMAL_r/SHOT_V7  # descriptor path
+manual_seed: 1234
+non-isometric: true
+partial: false
+visualize: true
+
+# path
+path:
+  resume_state: ~
+
+# datasets
+datasets:
+  test_dataset:
+    name: Val
+    type: PairSmalDataset
+    phase: test
+    data_root: ../data/SMAL_r/
+    category: true
+    return_evecs: true
+    return_faces: true
+    num_evecs: 128 #for MWP
+    return_corr: true
+    return_dist: true
+
+# network setting
+networks:
+  #1
+  permutation:
+    type: Similarity
+    tau: 0.07
+    hard: true
+
+# validation setting
+val:
+  metrics:
+    geo_error:
+      type: calculate_geodesic_error
+    plot_pck:
+      type: plot_pck

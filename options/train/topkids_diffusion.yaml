@@ -1,0 +1,104 @@
+# general setting
+name: topkids
+backend: dp # DataParallel
+type: SpatialLearningBasisModel  #OnlyLearningBasisModel # FMNetModel 
+num_gpu: 1 # 这里设置1, 表示只在单卡上运行， 不要改动
+gpu_idx: 3 # 指定运行下标
+manual_seed: 1234
+# norm_filter: true
+non-isometric: false   # 多滤波效果更好
+partial: false
+save_filter: true
+
+# path
+path:
+  resume_state: ~
+  # resume_state: checkpoints/topkids.pth
+  # resume: false
+
+# datasets
+datasets:
+  train_dataset:
+    name: Train
+    type: PairTopKidsDataset
+    phase: train
+    data_root: ../data/TOPKIDS/
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200 #200
+    return_dist: False
+  test_dataset:
+    name: Test
+    type: PairTopKidsDataset
+    phase: test
+    data_root: ../data/TOPKIDS/
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200 #200
+    return_dist: True
+  # setting for train dataset
+  batch_size: 1
+  num_worker: 8
+
+# network setting
+networks:
+  #1
+  feature_extractor:
+    type: DiffusionNet
+    in_channels: 16
+    out_channels: 128
+    cache_dir: ../data/TOPKIDS/diffusion
+    input_type: hks
+  permutation:
+    type: Similarity #DiffSimilarity  #Similarity
+    tau: 0.07  # 0.07
+  #2 learnable filter
+  basisconv:
+    type: EigenBasis_Fliters
+    C_inout: 200
+    filter_type: heat_delta  #
+
+# training setting
+train:
+  total_epochs: 100 #100
+  optims:
+    feature_extractor:
+      type: Adam
+      lr: 1.0e-3
+    basisconv:
+      type: Adam
+      lr: 1.0e-3
+  schedulers:
+    feature_extractor:
+      type: CosineAnnealingLR
+      eta_min: 1.0e-4
+      T_max: 100 #  100
+    basisconv:
+      type: CosineAnnealingLR
+      eta_min: 1.0e-4
+      T_max: 15 #15
+  losses:
+    rfmnet_loss:
+      type: RfmnetLoss
+      loss_weight: 1.0
+    # contrastive_loss:
+    #   type: SelfLoss
+    #   loss_weight: 5.0  
+
+# validation setting
+val:
+  val_freq: 2000 #4000
+  metrics:
+    geo_error:
+      type: calculate_geodesic_error
+    plot_pck:
+      type: plot_pck
+
+# log setting
+logger:
+  print_freq: 100
+  save_checkpoint_freq: 2000
+
+
+
+

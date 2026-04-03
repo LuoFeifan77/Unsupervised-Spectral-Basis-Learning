@@ -1,0 +1,127 @@
+# general setting
+name: pretrain_shrec16_new
+backend: dp # DataParallel
+type: SpatialLearningBasisModel
+num_gpu: 1 #
+gpu_idx: 1 #
+manual_seed: 1234
+non-isometric: false
+partial: false
+save_filter: true
+zoomout_refine: true
+visualize: false
+
+# path
+path:
+  resume_state: ~
+
+# datasets
+datasets:
+  train_dataset1:
+    name: DT4DIntraTrain
+    type: PairDT4DDataset
+    phase: train
+    data_root: ../data/DT4D_r/
+    inter_class: False
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200
+    return_corr: False
+    return_dist: False
+  train_dataset2:
+    name: SmalTrain
+    type: PairSmalDataset
+    phase: train
+    data_root: ../data/SMAL_r/
+    category: False
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200
+    return_corr: False
+    return_dist: False
+  train_dataset3:
+    name: FaustTrain
+    type: PairFaustDataset
+    phase: train
+    data_root: ../data/FAUST_r
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200
+    return_corr: False
+    return_dist: False
+  train_dataset4:
+    name: ScapeTrain
+    type: PairScapeDataset
+    phase: train
+    data_root: ../data/SCAPE_r
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200
+    return_corr: False
+    return_dist: False
+  test_dataset:
+    name: CutsVal
+    type: PairShrec16Dataset
+    cut_type: cuts
+    data_root: ../data/SHREC16_test/
+    return_evecs: true
+    return_faces: true
+    num_evecs: 200
+    return_corr: true
+    return_dist: true
+  batch_size: 1
+  num_worker: 16
+
+# network setting
+networks:
+  feature_extractor:
+    type: DiffusionNet
+    in_channels: 3
+    out_channels: 128
+    cache_dir: ../data/DT4D_r/diffusion
+    input_type: xyz
+  permutation:
+    type: Similarity
+    tau: 0.07
+  basisconv:
+    type: EigenBasis_Fliters
+    C_inout: 200
+
+
+# training setting
+train:
+  total_epochs: 5 # 15
+  optims: 
+    feature_extractor:
+      type: Adam
+      lr: 1.0e-3
+    basisconv:
+      type: Adam
+      lr: 1.0e-3
+  schedulers:  # 
+    feature_extractor:
+      type: CosineAnnealingLR  #
+      eta_min: 1.0e-4
+      T_max: 5
+    basisconv:
+      type: CosineAnnealingLR
+      eta_min: 1.0e-4
+      T_max: 5
+  losses:
+    rfmnet_loss:
+      type: RfmnetLoss
+      loss_weight: 1.0
+
+# validation setting
+val:
+  val_freq: 10000
+  metrics:
+    geo_error:
+      type: calculate_geodesic_error
+    plot_pck:
+      type: plot_pck
+
+# log setting
+logger:
+  print_freq: 200
+  save_checkpoint_freq: 10000

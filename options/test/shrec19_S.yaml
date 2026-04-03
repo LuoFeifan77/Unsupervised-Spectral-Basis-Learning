@@ -1,0 +1,57 @@
+# general setting
+name: shrec19_s
+backend: dp # DataParallel
+type: SpatialLearningBasisModel # FMNetModel 
+num_gpu: 1 # 这里设置1, 表示只在单卡上运行， 不要改动
+gpu_idx: 1 # 指定运行下标
+manual_seed: 1234
+# refine : 15
+partial: false
+save_filter: false
+zoomout_refine: true
+visualize: false
+
+# path
+path:
+  resume_state: checkpoints_ours/scape_archived_20250827_020000/models/14000.pth #experiments/faust_scape/models/22000.pth #experiments/scape_archived_20250827_020000/models/14000.pth
+  resume: false
+
+# datasets
+datasets:
+  test_dataset:
+    name: Shrec19Val
+    type: PairShrec19Dataset
+    phase: test
+    data_root: ../data/SHREC19_r
+    return_evecs: True
+    return_faces: True
+    num_evecs: 200
+    return_dist: True
+
+# network setting
+networks:
+  #1
+  feature_extractor:
+    type: DiffusionNet
+    in_channels: 16
+    out_channels: 128
+    cache_dir: ../data/SCAPE_r/diffusion
+    input_type: hks
+  permutation:
+    type: Similarity
+    tau: 0.07
+    hard: true #  true
+
+  #2 learnable filter
+  basisconv:
+    type: EigenBasis_Fliters
+    C_inout: 200
+
+
+# validation setting
+val:
+  metrics:
+    geo_error:
+      type: calculate_geodesic_error
+    plot_pck:
+      type: plot_pck
