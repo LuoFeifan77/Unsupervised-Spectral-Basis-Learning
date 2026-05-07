@@ -8,7 +8,7 @@ manual_seed: 1234
 non-isometric: false
 partial: false
 save_filter: true
-zoomout_refine: true
+G_zoomout: true
 
 # path
 path:
@@ -58,7 +58,6 @@ datasets:
   batch_size: 1
   num_worker: 16
 
-# 不考虑交叉泛化
 
 networks:
   #1 extracor 
@@ -75,7 +74,6 @@ networks:
   basisconv:
     type: EigenBasis_Fliters
     C_inout: 200
-    filter_type: heat_delta  #
 
 # training setting 需要修改
 train:

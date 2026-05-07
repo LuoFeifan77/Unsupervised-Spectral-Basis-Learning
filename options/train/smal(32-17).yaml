@@ -1,11 +1,11 @@
 # general setting
 name: smal
 backend: dp # DataParallel
-type: SpectralBasisLearningModel  #OnlyLearningBasisModel # FMNetModel 
-num_gpu: 1 # 这里设置1, 表示只在单卡上运行， 不要改动
-gpu_idx: 4 # 指定运行下标
+type: SpectralBasisLearningModel  
+num_gpu: 1 # 
+gpu_idx: 4 # 
 manual_seed: 1234
-non-isometric: True #false, 直接用nn看结果
+non-isometric: True #
 partial: false
 save_filter: true
 
@@ -21,10 +21,10 @@ datasets:
     type: PairSmalDataset
     phase: train
     data_root: ../data/SMAL_r/
-    category: False #True
+    category: False # True for 29/20
     return_evecs: True
     return_faces: True
-    num_evecs: 200 #200
+    num_evecs: 200 
     return_corr: True
     return_dist: False
   test_dataset:
@@ -40,14 +40,14 @@ datasets:
     return_dist: True
   # setting for train dataset
   batch_size: 1
-  num_worker: 8 #16
+  num_worker: 16
 
 # network setting
 networks:
   feature_extractor:
     type: DiffusionNet
-    in_channels: 16  #16  #
-    out_channels: 128  #256
+    in_channels: 16  
+    out_channels: 128  
     cache_dir: ../data/SMAL_r/diffusion
     input_type: hks
   permutation:
@@ -56,7 +56,6 @@ networks:
   basisconv:
     type: EigenBasis_Fliters
     C_inout: 200
-    filter_type: heat_delta  #
 
 # training setting
 train:

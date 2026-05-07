@@ -67,7 +67,6 @@ networks:
   basisconv:
     type: EigenBasis_Fliters
     C_inout: 200
-    filter_type: heat_delta  #
 
 # training setting
 train:
