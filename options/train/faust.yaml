@@ -1,9 +1,9 @@
 # general setting
 name: faust
 backend: dp # DataParallel
-type: SpatialLearningBasisModel #
-num_gpu: 1 #
-gpu_idx: 1 #
+type: SpectralBasisLearningModel 
+num_gpu: 1 # 
+gpu_idx: 1 # 
 manual_seed: 1234
 non-isometric: false
 partial: false
@@ -56,7 +56,7 @@ datasets:
     return_dist: True
   #setting for train dataset
   batch_size: 1
-  num_worker: 8
+  num_worker: 16
 
 # 不考虑交叉泛化
 
@@ -97,12 +97,10 @@ train:
       eta_min: 1.0e-4
       T_max: 15
   losses:
-    rfmnet_loss:
-      type: RfmnetLoss
+    mrsloss:
+      type: MRSLoss
       loss_weight: 1.0
-    # contrastive_loss:
-    #   type: SelfLoss
-    #   loss_weight: 5.0  
+
 
 # validation setting
 val:

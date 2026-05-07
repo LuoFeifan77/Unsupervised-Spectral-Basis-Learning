@@ -1,9 +1,9 @@
 # general setting
 name: scape
 backend: dp # DataParallel
-type: SpatialLearningBasisModel  #OnlyLearningBasisModel # FMNetModel 
-num_gpu: 1 # 这里设置1, 表示只在单卡上运行， 不要改动
-gpu_idx: 4 # 指定运行下标
+type: SpectralBasisLearningModel   
+num_gpu: 1 # 
+gpu_idx: 4 # 
 manual_seed: 1234
 non-isometric: false
 partial: false
@@ -56,7 +56,7 @@ datasets:
     return_dist: True
   # setting for train dataset
   batch_size: 1
-  num_worker: 8
+  num_worker: 16
 
 # network setting
 networks:
@@ -96,8 +96,8 @@ train:
       eta_min: 1.0e-4
       T_max: 30
   losses:
-    rfmnet_loss:
-      type: RfmnetLoss
+    mrsloss:
+      type: MRSLoss
       loss_weight: 1.0
 
 # validation setting
