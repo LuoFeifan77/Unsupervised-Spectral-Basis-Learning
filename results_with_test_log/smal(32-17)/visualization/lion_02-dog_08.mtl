@@ -1,0 +1,11 @@
+# write_obj (c) 2004 Gabriel Peyr
+newmtl material_0
+Ka  0.200000 0.200000 0.200000
+Kd  1.000000 1.000000 1.000000
+Ks  1.000000 1.000000 1.000000
+Tr  1
+Ns  0
+illum 2
+map_Kd texture.png
+#
+# EOF
