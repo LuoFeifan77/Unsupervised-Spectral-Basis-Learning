@@ -70,10 +70,10 @@ The feature learning network implementation is adapted from [DiffusionNet](https
 ## Attribution
 Please cite our paper when using the code. You can use the following bibtex
 ```
-@inproceedings{luo2026unsupervised,
-  title={Unsupervised Contrastive Learning for Efficient and Robust Spectral Shape Matching},
+@article{luo2026feature,
+  title={From Feature Learning to Spectral Basis Learning: A Unifying and Flexible Framework for Efficient and Robust Shape Matching},
   author={Luo, Feifan and Chen, Hongyang},
-  booktitle={arXiv},
+  journal={arXiv preprint arXiv:2603.23383},
   year={2026}
 }
 
