@@ -13,7 +13,6 @@ from networks.filter_network import Meyer
 class SpectralBasisLearningModel(BaseModel):  # Base model
     def __init__(self, opt):
         self.with_refine = opt.get('refine', -1)
-        self.partial = opt.get('partial', False)
         self.non_isometric = opt.get('non-isometric', False)
         self.G_zoomout = opt.get('G_zoomout', False)
         self.using_nn_search = opt.get('using_nn_search', False)

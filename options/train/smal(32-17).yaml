@@ -9,7 +9,6 @@ non-isometric: True #
 partial: false
 save_filter: true
 
-
 # path
 path:
   resume_state: ~

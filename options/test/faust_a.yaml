@@ -1,24 +1,20 @@
 # general setting
 name: faust_a_f
 backend: dp # DataParallel
-type: SpatialLearningBasisModel # FMNetModel 
-num_gpu: 1 # 这里设置1, 表示只在单卡上运行， 不要改动
-gpu_idx: 2 # 指定运行下标
+type: SpectralBasisLearningModel  
+num_gpu: 1 # 
+gpu_idx: 2 # 
 manual_seed: 1234
-# refine : 15
-partial: false
-save_filter: false
-zoomout_refine: true
-visualize: false
+non-isometric: false 
+G_zoomout: true
+save_filter: true
+visualize: true
 
 # path
 path:
-  resume_state: checkpoints_ours/faust_archived_20250827_015955/models/6000.pth #experiments/faust/models/62000.pth
+  resume_state: checkpoints/faust.pth
   resume: false
 
-# path:
-#   resume_state: checkpoints_ours/scape_archived_20250827_020000/models/14000.pth #checkpoints_ours/faust_archived_20250827_015955/models/6000.pth
-#   resume: false
 
 # datasets
 datasets:
