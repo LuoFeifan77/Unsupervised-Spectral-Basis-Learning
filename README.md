@@ -11,7 +11,7 @@ pip install -r requirements.txt # install other necessary libraries via pip
 ```
 
 ## Dataset
-To train and test datasets used in this paper, please download the datasets from the this [DongliangCao](https://drive.google.com/file/d/1zbBs3NjUIBBmVebw38MC1nhu_Tpgn1gr/view?usp=share_link) and put all datasets under ../data/
+To train and test datasets used in this paper, please download the datasets from [DongliangCao](https://drive.google.com/file/d/1zbBs3NjUIBBmVebw38MC1nhu_Tpgn1gr/view?usp=share_link) and put all datasets under ../data/
 ```Shell
 ├── data
     ├── FAUST_r
