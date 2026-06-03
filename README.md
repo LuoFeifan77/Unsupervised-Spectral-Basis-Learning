@@ -70,10 +70,11 @@ The feature learning network implementation is adapted from [DiffusionNet](https
 ## Attribution
 Please cite our paper when using the code. You can use the following bibtex
 ```
-@article{luo2026feature,
+@inproceedings{luo2026feature,
   title={From Feature Learning to Spectral Basis Learning: A Unifying and Flexible Framework for Efficient and Robust Shape Matching},
   author={Luo, Feifan and Chen, Hongyang},
-  journal={arXiv preprint arXiv:2603.23383},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={31377--31388},
   year={2026}
 }
 
