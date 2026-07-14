@@ -58,7 +58,7 @@ python texture_transfer.py
 You can find all pre-trained models in [checkpoints](checkpoints) for reproducibility.
 
 ## Results
-You can find all matching results in [results](results).
+You can find all matching results in [matching_results_cvpr26]([results](https://drive.google.com/drive/folders/1NpJhPE1Iz4hunTpRCVwEb5nzbnS5a7Tb)).
 
 ## Acknowledgement
 The framework implementation is adapted from [Unsupervised Learning of Robust Spectral Shape Matching](https://github.com/dongliangcao/Unsupervised-Learning-of-Robust-Spectral-Shape-Matching/tree/main?tab=readme-ov-file).\
