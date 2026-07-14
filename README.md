@@ -23,9 +23,6 @@ To train and test datasets used in this paper, please download the datasets from
     ├── TOPKIDS
     ├── SMAL_r
     ├── DT4D_r
-    ├── SHREC20
-    ├── SHREC16
-    ├── SHREC16_test
 ```
 We thank the original dataset providers for their contributions to the shape analysis community, and that all credits should go to the original authors.
 
