@@ -1,6 +1,10 @@
 # From Feature Learning to Spectral Basis Learning: A Unifying and Flexible Framework for Efficient and Robust Shape Matching has been accepted by CVPR2026!
 The code will be released as soon as possible.
 
+# [From Feature Learning to Spectral Basis Learning: A Unifying and Flexible Framework for Efficient and Robust Shape Matching [CVPR 2026]](https://luofeifan77.github.io/publications/)
+ [![PDF](https://img.shields.io/badge/PDF-Download-blue)](https://arxiv.org/pdf/2603.23383)
+<!--[![ArXiv](https://img.shields.io/badge/arXiv-2312.03678-b31b1b.svg)](https://arxiv.org/abs/2312.03678)-->
+
 
 ## Installation
 ```bash 
@@ -78,3 +82,6 @@ Please cite our paper when using the code. You can use the following bibtex
 }
 
 ```
+
+## Contact
+If you have any questions, please feel free to contact me via [email](luoff@zju.edu.cn) without any hesitation.
