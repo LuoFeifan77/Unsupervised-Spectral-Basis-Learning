@@ -5,8 +5,8 @@
 
 ## Installation
 ```bash 
-conda create -n basisleaning python=3.8 # create new viertual environment
-conda activate basisleaning
+conda create -n basis_learning python=3.8 # create new viertual environment
+conda activate basis_learning
 conda install pytorch cudatoolkit -c pytorch # install pytorch, cuda==11.8!
 pip install -r requirements.txt # install other necessary libraries via pip
 ```
